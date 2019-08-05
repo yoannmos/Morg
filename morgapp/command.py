@@ -2,6 +2,8 @@
 command Module
 """
 import tkinter
+import keyboard  # using module keyboard
+
 
 class MasterCommand:
     """
@@ -9,11 +11,18 @@ class MasterCommand:
     """
 
     def __init__(self):
+        while True:  # making a loop
+            try:  # used try so that if user pressed other than the given key error will not be shown
+                if keyboard.is_pressed("q"):  # if key 'q' is pressed
+                    print("You Pressed A Key!")
+                    break  # finishing the loop
+                else:
+                    pass
+            except:
+                break  # if user pressed a key other than the given key the loop will break
 
-    def insert_commande(self)
-    
-    
-
+    def insert_commande(self):
+        return
 
 
 class FileCommand:
@@ -39,7 +48,7 @@ class FileCommand:
         Fonction open command
         """
 
-        ftypes = [("Python files", "*.py"), ("All files", "*")]
+        ftypes = [("Python files", "*.py"), ("Org files", "*.org"), ("All files", "*")]
         dlg = tkinter.filedialog.Open(self, filetypes=ftypes)
         fl_show = dlg.show()
 

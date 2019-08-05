@@ -20,6 +20,7 @@ class Space_Mode(Mode):
     space = "SPACE"
     color = "black"
     key = ["SPC"]
+    log["state"] = "disabled"
 
 
 class Normal_Mode(Mode):
@@ -27,6 +28,7 @@ class Normal_Mode(Mode):
     name = "NORMAL"
     color = "orange"
     key = ["ESC"]
+    log["state"] = "disabled"
 
 class Insert_Mode(Mode):
 
