@@ -1,67 +1,119 @@
 """
-command Module
+Command Module
 """
-import tkinter
-import keyboard  # using module keyboard
+
+import tkinter as tk
+from settings import SETTINGS
 
 
-class MasterCommand:
+class MasterCommand(tk.Frame):
     """
     Class Master Command
     """
 
-    def __init__(self):
-        while True:  # making a loop
-            try:  # used try so that if user pressed other than the given key error will not be shown
-                if keyboard.is_pressed("q"):  # if key 'q' is pressed
-                    print("You Pressed A Key!")
-                    break  # finishing the loop
-                else:
-                    pass
-            except:
-                break  # if user pressed a key other than the given key the loop will break
+    def __init__(self, root, window, statusbar, spacebar):
+        tk.Frame.__init__(self, root)
 
-    def insert_commande(self):
-        return
+        self.root = root
+        self.window = window
+        self.status_bar = statusbar
+        self.spacebar = spacebar
 
+        # self.selected_mode = "NORMAL"
+        self.set_mode("NORMAL")
 
-class FileCommand:
-    """
-    Class File Command
-    """
+        self.space_key_binding = SETTINGS["Commande"]["space_key_binding"]
+        self.escape_key_binding = SETTINGS["Commande"]["escape_key_binding"]
+        self.insert_key_binding = SETTINGS["Commande"]["insert_key_binding"]
 
-    def __init__(self):
-        self.txt = tkinter.Text(self)
-        self.txt.pack(fill=tkinter.BOTH, expand=1)
+        self.update_mode_label()
+        # MODE Binding
+        self.root.bind(self.space_key_binding, self.space_key)
+        self.root.bind(self.escape_key_binding, self.escape_key)
+        for k in self.insert_key_binding:
+            self.root.bind(k, self.insert_key)
 
-    def read_command(self, filename):
+        self.pack()
+
+    def update_mode_label(self):
         """
-        Fonction read_file
+        Update mode label
         """
+        # TODO : Adapt to real status bar, MODE label
+        self.status_bar["text"] = self.selected_mode
 
-        f_opened = open(filename, "r")
-        text = f_opened.read()
-        return text
-
-    def open_command(self):
+    def set_mode(self, mode):
         """
-        Fonction open command
+        set_mode
         """
+        # TODO : Disapear/ Reapear space bar
+        if mode == "SPACE":
+            self.selected_mode = "SPACE"
+            self.spacebar.pack()
+            self.window["state"] = "disabled"
+            self.spacebar["state"] = "normal"
 
-        ftypes = [("Python files", "*.py"), ("Org files", "*.org"), ("All files", "*")]
-        dlg = tkinter.filedialog.Open(self, filetypes=ftypes)
-        fl_show = dlg.show()
+        elif mode == "NORMAL":
+            self.selected_mode = "NORMAL"
+            self.spacebar.pack_forget()
+            self.window["state"] = "normal"
+            self.spacebar["state"] = "disabled"
 
-        if fl_show != "":
-            text = self.read_command(fl_show)
-            self.txt.insert(tkinter.END, text)
+        elif mode == "INSERT":
+            self.selected_mode = "INSERT"
+            self.spacebar.pack_forget()
+            self.window["state"] = "normal"
+            self.spacebar["state"] = "disabled"
 
-    def save_command(self):
+        # Update status bar
+        self.update_mode_label()
+
+    def space_key(self, event):
         """
-        Fonction save_command
+        space_key
         """
-        file = tkinter.filedialog.asksaveasfile(mode="w")
-        if file:
-            data = self.txt.get("1.0", tkinter.END + "-1c")
-            file.write(data)
-            file.close()
+        if self.selected_mode == "NORMAL":
+            self.set_mode("SPACE")
+        else:
+            return
+
+        print("pressed", repr(event.char))
+        print(self.selected_mode, " activated")
+
+    def escape_key(self, event):
+        """
+        escape_key
+        """
+        self.set_mode("NORMAL")
+
+        print("pressed", repr(event.char))
+        print(self.selected_mode, " activated")
+
+    def insert_key(self, event):
+        """
+        insert_key
+        """
+        if self.selected_mode == "NORMAL":
+            self.set_mode("INSERT")
+        else:
+            return
+
+        print("pressed", repr(event.char))
+        print(self.selected_mode, " activated")
+
+
+if __name__ == "__main__":
+
+    ROOT = tk.Tk()
+
+    FRAME_1 = tk.Label(ROOT, text="<Window>")
+    FRAME_2 = tk.Label(ROOT)
+    FRAME_3 = tk.Label(ROOT, text="<Spacebar>)")
+
+    FRAME_1.pack()
+    FRAME_2.pack()
+    FRAME_3.pack()
+
+    COM = MasterCommand(ROOT, FRAME_1, FRAME_2, FRAME_3)
+
+    ROOT.mainloop()

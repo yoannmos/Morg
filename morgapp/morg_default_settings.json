@@ -1,34 +1,21 @@
 {
-    //Commande
-    "commande.master.key": " ",
-    //Workbench
-    "workbench.colorTheme": "One Dark Pro",
-    "workbench.iconTheme": "vscode-icons",
-    "workbench.settings.editor": "json",
-    "workbench.settings.openDefaultSettings": true,
-    "workbench.startupEditor": "newUntitledFile",
-    //Editor
-    "editor.formatOnSave": true,
-    "editor.fontFamily": "Source Code Pro",
-    //Terminal
-    "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
-    //Git
-    "git.autofetch": true,
-    //Python
-    "python.pythonPath": "D:\\PythonWorkspace\\Python Install\\python.exe",
-    "python.formatting.provider": "black",
-    //Code Runneer
-    "code-runner.clearPreviousOutput": true,
-    "code-runner.showExecutionMessage": false,
-    "code-runner.executorMap": {
-        "python": "$pythonPath -u $fullFileName",
+    "Commande": {
+        "space_key_binding": "<space>",
+        "escape_key_binding": "<Escape>",
+        "insert_key_binding": [
+            "a",
+            "A",
+            "i",
+            "I",
+            "o",
+            "O"
+        ]
     },
-    "editor.renderWhitespace": "none",
-    "editor.renderControlCharacters": false,
-    //Org-mode
-    "org.todoKeywords": [
-        "TODO",
-        "DONE",
-        "WAIT",
-    ]
+    "Workbench": {
+        "workbench.colorTheme": "One Dark Pro",
+        "workbench.startupEditor": "newUntitledFile"
+    },
+    "Editor": {
+        "editor.fontFamily": "Source Code Pro"
+    }
 }
