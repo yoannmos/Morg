@@ -78,16 +78,13 @@ class MasterCommand(tk.Frame):
             return
 
         print("pressed", repr(event.char))
-        print(self.selected_mode, " activated")
 
     def escape_key(self, event):
         """
         escape_key
         """
         self.set_mode("NORMAL")
-
         print("pressed", repr(event.char))
-        print(self.selected_mode, " activated")
 
     def insert_key(self, event):
         """
@@ -97,9 +94,7 @@ class MasterCommand(tk.Frame):
             self.set_mode("INSERT")
         else:
             return
-
         print("pressed", repr(event.char))
-        print(self.selected_mode, " activated")
 
 
 if __name__ == "__main__":

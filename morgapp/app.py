@@ -19,7 +19,7 @@ class Application(tk.Tk):
         # self.root = tk.Tk()
         self.title("Morg")
         self.geometry("800x800")
-        self.wm_iconbitmap("Morg/morgapp/Notepad.ico")
+        self.wm_iconbitmap("morgapp\\Notepad.ico")
 
         spacebar_frame = SpaceBar(self)
         spacebar_frame.pack(side=tk.BOTTOM)
@@ -29,7 +29,9 @@ class Application(tk.Tk):
         workframe_frame.pack(side=tk.BOTTOM)
 
         # MODE Binding
-        master_com = MasterCommand(self, workframe_frame, spacebar_frame)
+        master_com = MasterCommand(
+            self, workframe_frame, statusbar_frame, spacebar_frame
+        )
         statusbar_frame.set_mode(master_com.selected_mode)
 
         self.mainloop()
