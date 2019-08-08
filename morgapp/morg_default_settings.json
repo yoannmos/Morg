@@ -1,7 +1,7 @@
 {
     "Commande": {
         "space_key_binding": "<space>",
-        "escape_key_binding": "<Escape>",
+        "normal_key_binding": "<Escape>",
         "insert_key_binding": [
             "a",
             "A",
@@ -9,6 +9,31 @@
             "I",
             "o",
             "O"
+        ],
+        "normal_key_forbiden": [
+            "<Control-Key-h>",
+            "<Meta-Key-Delete>",
+            "<Meta-Key-BackSpace>",
+            "<Meta-Key-d>",
+            "<Meta-Key-b>",
+            "<<Redo>>",
+            "<<Undo>>",
+            "<Control-Key-t>",
+            "<Control-Key-o>",
+            "<Control-Key-k>",
+            "<Control-Key-d>",
+            "<Key>",
+            "<Key-Insert>",
+            "<<PasteSelection>>",
+            "<<Clear>>",
+            "<<Paste>>",
+            "<<Cut>>",
+            "<Key-BackSpace>",
+            "<Key-Delete>",
+            "<Key-Return>",
+            "<Control-Key-i>",
+            "<Key-Tab>",
+            "<Shift-Key-Tab>"
         ]
     },
     "Workbench": {

@@ -26,7 +26,7 @@ class StatusBar(tk.Frame):
         self.line.pack(side="right", fill=tk.X)
 
         self.mode = tk.Label(self, bd=1, relief=tk.SUNKEN, anchor=tk.W)
-        self.mode.config(text="Mode: 1")
+        self.mode.config(text="NORMAL")
         self.mode.pack(side="right", fill=tk.X)
 
     def set_msg(self, data):
@@ -66,7 +66,7 @@ class StatusBar(tk.Frame):
         Set the mode field.
         """
 
-        self.mode.config(text="Mode: %s" % mode)
+        self.mode.config(text=mode)
         self.mode.update_idletasks()
 
 

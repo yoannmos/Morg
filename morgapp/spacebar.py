@@ -19,9 +19,9 @@ class SpaceBar(tk.Frame):
         self.mode.config(text="Col: 0")
         self.mode.pack(side="left", expand=True, fill=tk.X)
 
-        self.column = tk.Label(self, bd=1, relief=tk.SUNKEN, anchor=tk.W)
-        self.column.config(text="Col: 0")
-        self.column.pack(side="right", fill=tk.X)
+        self.key = tk.Label(self, bd=1, relief=tk.SUNKEN, anchor=tk.W)
+        self.key.config(text="Col: 0")
+        self.key.pack(side="right", fill=tk.X)
 
     def set_mode(self, data):
         """
@@ -31,13 +31,13 @@ class SpaceBar(tk.Frame):
         self.mode.config(text=data)
         self.mode.update_idletasks()
 
-    def set_column(self, col):
+    def set_key(self, keyboard_entry):
         """
-        Set the column field with col.
+        Set the key field with col.
         """
 
-        self.column.config(text="Col: %s" % col)
-        self.column.update_idletasks()
+        self.key.config(text=keyboard_entry)
+        self.key.update_idletasks()
 
 
 if __name__ == "__main__":
