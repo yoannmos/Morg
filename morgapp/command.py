@@ -35,6 +35,17 @@ class MasterCommand(tk.Frame):
 
         self.pack()
 
+    def enable_disable(self, frame, status):
+        """Enable or Disable a frame"""
+        child_list = frame.winfo_children()
+        for child in child_list:
+            if status == "disable":
+                child.configure(state="disable")
+            elif status == "normal" or "enable":
+                child.configure(state="normal")
+            else:
+                raise ValueError("Wrong status input")
+
     def update_mode_label(self):
         """
         Update mode label
@@ -50,20 +61,26 @@ class MasterCommand(tk.Frame):
         if mode == "SPACE":
             self.selected_mode = "SPACE"
             self.spacebar.pack()
-            self.window["state"] = "disabled"
-            self.spacebar["state"] = "normal"
+            self.enable_disable(self.window, "disable")
+            self.enable_disable(self.spacebar, "normal")
+            # self.window["state"] = "disabled"
+            # self.spacebar["state"] = "normal"
 
         elif mode == "NORMAL":
             self.selected_mode = "NORMAL"
             self.spacebar.pack_forget()
-            self.window["state"] = "normal"
-            self.spacebar["state"] = "disabled"
+            self.enable_disable(self.window, "normal")
+            self.enable_disable(self.spacebar, "disable")
+            # self.window["state"] = "normal"
+            # self.spacebar["state"] = "disabled"
 
         elif mode == "INSERT":
             self.selected_mode = "INSERT"
             self.spacebar.pack_forget()
-            self.window["state"] = "normal"
-            self.spacebar["state"] = "disabled"
+            self.enable_disable(self.window, "normal")
+            self.enable_disable(self.spacebar, "disable")
+            # self.window["state"] = "normal"
+            # self.spacebar["state"] = "disabled"
 
         # Update status bar
         self.update_mode_label()
