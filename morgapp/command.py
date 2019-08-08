@@ -19,24 +19,26 @@ class MasterCommand(tk.Frame):
         self.status_bar = statusbar
         self.spacebar = spacebar
 
-        self.selected_mode = ""
-        self.normal_key(True)
+        self.selected_mode = "NORMAL"
+        # self.normal_key()
 
         self.space_key_binding = SETTINGS["Commande"]["space_key_binding"]
         self.escape_key_binding = SETTINGS["Commande"]["normal_key_binding"]
         self.insert_key_binding = SETTINGS["Commande"]["insert_key_binding"]
 
-        self.update_mode_label()
+        self.update_mode()
+
+        self.status_bar.set_mode(self.selected_mode)
+        self.binding_key()
+        self.pack()
+        # self.spacebar.pack_forget()
+
+    def binding_key(self):
         # MODE Binding
         self.root.bind(self.space_key_binding, self.space_key)
         self.root.bind(self.escape_key_binding, self.normal_key)
         for k in self.insert_key_binding:
-            self.root.bind(k, self.insert_key)
-
-        self.status_bar.set_mode(self.selected_mode)
-
-        self.pack()
-        self.spacebar.pack_forget()
+            self.root.bind(k, self.insert_key(True))
 
     def enable_disable(self, frame, status):
         """Enable or Disable a frame"""
@@ -46,26 +48,19 @@ class MasterCommand(tk.Frame):
                 try:
                     frame.configure(state="disable")
                 except tk.TclError:
-                    child.configure(state="disabled")
+                    try:
+                        child.configure(state="disabled")
+                    except tk.TclError:
+                        pass
             elif status == "normal" or "enable":
                 try:
                     frame.configure(state="normal")
                 except tk.TclError:
                     child.configure(state="normal")
-            elif status == "readonly":
-                print("Here")
-                try:
-                    frame.configure(state="readonly")
-                    print("frame readonly PASS")
-                except tk.TclError:
-                    child.configure(state="readonly")
-                    print("child readonly PASS")
-                finally:
-                    print("WTFFFF")
             else:
                 raise ValueError("Wrong status input")
 
-    def update_mode_label(self):
+    def update_mode(self):
         """
         Update mode label
         """
@@ -78,10 +73,10 @@ class MasterCommand(tk.Frame):
         """
         if self.selected_mode == "NORMAL":
             self.selected_mode = "SPACE"
-            self.enable_disable(self.workframe, "disable")
+            # self.enable_disable(self.workframe, "disable")
             self.spacebar.pack()
             self.spacebar.focus_set()
-            self.update_mode_label()
+            self.update_mode()
         else:
             return
 
@@ -90,10 +85,11 @@ class MasterCommand(tk.Frame):
         escape_key
         """
         self.selected_mode = "NORMAL"
-        self.update_mode_label()
+        self.update_mode()
         self.spacebar.pack_forget()
         self.workframe.active_buffer.focus_set()
         self.workframe.read_only()
+        self.binding_key()
 
     def insert_key(self, _):
         """
@@ -101,8 +97,8 @@ class MasterCommand(tk.Frame):
         """
         if self.selected_mode == "NORMAL":
             self.selected_mode = "INSERT"
-            self.update_mode_label()
-            self.enable_disable(self.workframe, "normal")
+            self.update_mode()
+            # self.enable_disable(self.workframe, "normal")
             self.spacebar.pack_forget()
             self.workframe.active_buffer.focus_set()
             self.workframe.set_normal()

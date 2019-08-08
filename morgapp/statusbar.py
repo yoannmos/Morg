@@ -14,20 +14,26 @@ class StatusBar(tk.Frame):
         tk.Frame.__init__(self, master)
         self.config(border=1)
 
-        self.msg = tk.Label(self, bd=1, relief=tk.SUNKEN, anchor=tk.W)
-        self.msg.pack(side="left", expand=True, fill=tk.X)
+        self.mouffer = tk.Label(self, bd=1, anchor=tk.W)
+        self.mouffer.config(text="1")
+        self.mouffer.pack(anchor=tk.W, side="left")
+
+        self.mode = tk.Label(self, bd=1, relief=tk.SUNKEN, anchor=tk.W)
+        self.mode.config(text="INSERT")
+        self.mode.pack(anchor=tk.W, side="left", fill=tk.Y)
 
         self.column = tk.Label(self, bd=1, relief=tk.SUNKEN, anchor=tk.W)
         self.column.config(text="Col: 0")
-        self.column.pack(side="right", fill=tk.X)
+        self.column.pack(anchor=tk.E, side="right", fill=tk.Y, padx=15)
 
         self.line = tk.Label(self, bd=1, relief=tk.SUNKEN, anchor=tk.W)
         self.line.config(text="Line: 1")
-        self.line.pack(side="right", fill=tk.X)
+        self.line.pack(anchor=tk.E, side="right", fill=tk.Y, padx=0)
 
-        self.mode = tk.Label(self, bd=1, relief=tk.SUNKEN, anchor=tk.W)
-        self.mode.config(text="NORMAL")
-        self.mode.pack(side="right", fill=tk.X)
+        self.msg = tk.Label(self, bd=1, relief=tk.SUNKEN, anchor=tk.W)
+        self.msg.pack(side="left", expand=True, fill=tk.X)
+
+        self.pack(fill=tk.X, anchor=tk.S)
 
     def set_msg(self, data):
         """
@@ -74,5 +80,5 @@ if __name__ == "__main__":
 
     ROOT = tk.Tk()
     FRAME = StatusBar(ROOT)
-    FRAME.pack(side=tk.TOP)
+    FRAME.pack(fill=tk.X, anchor=tk.S)
     ROOT.mainloop()

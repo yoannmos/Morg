@@ -20,18 +20,13 @@ class Application(tk.Tk):
         self.title("Morg")
         self.geometry("800x800")
         self.wm_iconbitmap("morgapp\\Notepad.ico")
-        self.minsize(width=800, height=800)
+        self.minsize(width=600, height=600)
 
-        workframe_frame = WorkFrame(self)
-        statusbar_frame = StatusBar(self)
-        spacebar_frame = SpaceBar(self)
-
-        workframe_frame.pack()
-        statusbar_frame.pack()
-        spacebar_frame.pack()
+        WorkFrame(self)
+        StatusBar(self)
 
         # MODE Binding
-        MasterCommand(self, workframe_frame, statusbar_frame, spacebar_frame)
+        # MasterCommand(self, workframe_frame, statusbar_frame, spacebar_frame)
 
         self.mainloop()
 
