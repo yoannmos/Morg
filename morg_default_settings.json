@@ -23,6 +23,7 @@
             "<Control-Key-k>",
             "<Control-Key-d>",
             "<Key>",
+            "q",
             "<Key-Insert>",
             "<<PasteSelection>>",
             "<<Clear>>",

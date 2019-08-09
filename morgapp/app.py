@@ -19,7 +19,7 @@ class Application(tk.Tk):
         # self.root = tk.Tk()
         self.title("Morg")
         self.geometry("800x800")
-        self.wm_iconbitmap("morgapp\\Notepad.ico")
+        self.wm_iconbitmap("Notepad.ico")
         self.minsize(width=600, height=600)
 
         WorkFrame(self)
