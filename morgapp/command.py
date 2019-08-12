@@ -19,43 +19,38 @@ class MasterCommand(tk.Frame):
         self.status_bar = statusbar
         self.spacebar = spacebar
 
-        self.selected_mode = "NORMAL"
-        # self.access = "R"
+        self.selected_mode = "INSERT"
         self.status_bar.set_mode(self.selected_mode)
-        self.workframe.read_only()
 
         self.space_key_binding = SETTINGS["Commande"]["space_key_binding"]
         self.escape_key_binding = SETTINGS["Commande"]["normal_key_binding"]
         self.insert_key_binding = SETTINGS["Commande"]["insert_key_binding"]
-        self.commands_to_remove = SETTINGS["Commande"]["normal_key_forbiden"]
 
         self.binding_key(root)
 
         self.pack()
 
-    def file_acces(self, frame, access):
-        """
-            Read only methode
-            """
-        # TODO: Specification on wich key
-
     def update_mode(self):
-        """
-        Update mode label
-        """
+        """ Update mode label """
         # TODO : Adapt to real status bar, MODE label
         self.status_bar.mode["text"] = self.selected_mode
 
     def binding_key(self, frame, access="ALL"):
         """ MODE Binding """
+        # TODO: Delete insert mode character
 
         if access == "R":
-            for comtormve in self.commands_to_remove:
-                frame.bind(comtormve, lambda e: "break")
+            binding_access = frame.bind("<Key>", "pass")
+            frame.bind("<Left>", (lambda e: None))
+            frame.bind("<Right>", (lambda e: None))
+            frame.bind("<Up>", (lambda e: None))
+            frame.bind("<Down>", (lambda e: None))
+            frame.bind("<Control-Key-c>", (lambda e: None))
+            frame.bind("<Control-Key-v>", (lambda e: None))
 
         elif access == "W":
-            for comtormve in self.commands_to_remove:
-                frame.unbind(comtormve)
+            binding_access = frame.bind("<Key>", "pass")
+            frame.unbind("<Key>", binding_access)
 
         frame.bind(self.space_key_binding, self.space_key)
         frame.bind(self.escape_key_binding, self.normal_key)
@@ -63,27 +58,32 @@ class MasterCommand(tk.Frame):
             frame.bind(k, self.insert_key)
         self.pack()
 
-    def normal_key(self, event):
+    def normal_key(self, _):
         """
         escape_key
         """
 
         self.selected_mode = "NORMAL"
         self.update_mode()
-        self.file_acces(self.root, "R")
-        print("pressed", repr(event.char))
-        print(self.selected_mode, " activated")
+        self.binding_key(self.workframe.active_buffer, access="R")
 
-    def insert_key(self, event):
+        self.workframe.active_buffer.insert(tk.END, "")
+        self.workframe.active_buffer.config(state=tk.NORMAL)
+        self.workframe.active_buffer.focus_set()
+
+    def insert_key(self, _):
         """
         insert_key
         """
         if self.selected_mode == "NORMAL":
             self.selected_mode = "INSERT"
             self.update_mode()
-            self.file_acces(self.root, "W")
-            print("pressed", repr(event.char))
-            print(self.selected_mode, " activated")
+            self.binding_key(self.workframe.active_buffer, access="W")
+
+            self.workframe.active_buffer.insert(tk.END, "")
+            self.workframe.active_buffer.config(state=tk.NORMAL)
+            self.workframe.active_buffer.focus_set()
+
         else:
             return
 
@@ -94,6 +94,11 @@ class MasterCommand(tk.Frame):
         if self.selected_mode == "NORMAL":
             self.selected_mode = "SPACE"
             self.update_mode()
+
+            self.workframe.active_buffer.insert(tk.END, "")
+            self.workframe.active_buffer.config(state=tk.DISABLED)
+            self.spacebar.focus_set()
+
             print("pressed", repr(event.char))
             print(self.selected_mode, " activated")
         else:
@@ -119,51 +124,3 @@ if __name__ == "__main__":
     MasterCommand(ROOT, FRAME_1, FRAME_2, FRAME_3)
 
     ROOT.mainloop()
-
-    # def enable_disable(self, frame, status):
-    #     """Enable or Disable a frame"""
-    #     child_list = frame.winfo_children()
-    #     for child in child_list:
-    #         if status == "disable":
-    #             try:
-    #                 frame.configure(state="disable")
-    #             except tk.TclError:
-    #                 try:
-    #                     child.configure(state="disabled")
-    #                 except tk.TclError:
-    #                     pass
-    #         elif status == "normal" or "enable":
-    #             try:
-    #                 frame.configure(state="normal")
-    #             except tk.TclError:
-    #                 child.configure(state="normal")
-    #         else:
-    #             raise ValueError("Wrong status input")
-
-    # def read_only(self):
-    #     """
-    #     Read only methode
-    #     """
-    #     # TODO: Specification on wich key
-    #     if self.access == "R":
-    #         for comtormve in self.commands_to_remove:
-    #             self.bind(comtormve, lambda e: "break")
-    #         self.access = "W"
-    #         self.pack()
-    #     else:
-    #         for comtormve in self.commands_to_remove:
-    #             self.unbind(comtormve)
-    #         self.access = "R"
-
-    # def space_key(self, _):
-    #     """
-    #     space_key
-    #     """
-    #     if self.selected_mode == "NORMAL":
-    #         self.selected_mode = "SPACE"
-    #         # self.enable_disable(self.workframe, "disable")
-    #         self.spacebar.pack()
-    #         # self.spacebar.focus_set()
-    #         self.update_mode()
-    #     else:
-    #         return
