@@ -22,11 +22,12 @@ class Application(tk.Tk):
         self.wm_iconbitmap("Notepad.ico")
         self.minsize(width=600, height=600)
 
-        WorkFrame(self)
-        StatusBar(self)
+        workframe_frame = WorkFrame(self)
+        statusbar_frame = StatusBar(self)
+        spacebar_frame = SpaceBar(self)
 
         # MODE Binding
-        # MasterCommand(self, workframe_frame, statusbar_frame, spacebar_frame)
+        MasterCommand(self, workframe_frame, statusbar_frame, spacebar_frame)
 
         self.mainloop()
 

@@ -32,7 +32,6 @@ class MasterCommand(tk.Frame):
 
     def update_mode(self):
         """ Update mode label """
-        # TODO : Adapt to real status bar, MODE label
         self.status_bar.mode["text"] = self.selected_mode
 
     def binding_key(self, frame, access="ALL"):
@@ -87,7 +86,7 @@ class MasterCommand(tk.Frame):
         else:
             return
 
-    def space_key(self, event):
+    def space_key(self, _):
         """
         space_key
         """
@@ -99,8 +98,6 @@ class MasterCommand(tk.Frame):
             self.workframe.active_buffer.config(state=tk.DISABLED)
             self.spacebar.focus_set()
 
-            print("pressed", repr(event.char))
-            print(self.selected_mode, " activated")
         else:
             return
 
