@@ -50,7 +50,9 @@ class MasterCommand(tk.Frame):
 
     def binding_key(self, frame):
         """ MODE Binding """
-        # TODO: Delete insert mode character
+        # TODO: Delete commande character
+        # use binding tag and post class binding
+        # Exemple in _Module_Exemple
 
         frame.focus_set()
 
