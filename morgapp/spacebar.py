@@ -15,28 +15,28 @@ class SpaceBar(tk.Frame):
         tk.Frame.__init__(self, master)
         self.config(border=1)
 
-        self.mode = tk.Label(self, bd=1, relief=tk.SUNKEN, anchor=tk.W)
-        self.mode.config(text="Col: 0")
-        self.mode.pack(side="left", expand=True, fill=tk.X)
+        self.menu = tk.Label(self, bd=1, relief=tk.SUNKEN, anchor=tk.W)
+        self.menu.config(text="Col: 0")
+        self.menu.pack(side="top", fill=tk.X)
 
-        self.key = tk.Label(self, bd=1, relief=tk.SUNKEN, anchor=tk.W)
-        self.key.config(text="Col: 0")
-        self.key.pack(side="right", fill=tk.X)
+        self.key = tk.Label(self, bd=1, anchor=tk.W)
+        self.key.config(text="<ENTER KEY>")
+        self.key.pack(anchor=tk.W, side="left", fill=tk.Y)
 
-    def set_mode(self, data):
+    def set_menu(self, data):
         """
         Set statusbar msg.
         """
 
-        self.mode.config(text=data)
-        self.mode.update_idletasks()
+        self.menu.config(text=data)
+        self.menu.update_idletasks()
 
-    def set_key(self, keyboard_entry):
+    def set_key(self, data):
         """
         Set the key field with col.
         """
 
-        self.key.config(text=keyboard_entry)
+        self.key.config(text=data)
         self.key.update_idletasks()
 
 
