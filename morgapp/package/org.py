@@ -2,6 +2,19 @@
 Module Timestamp
 """
 from datetime import datetime
+from __master import BufferMenu
+
+
+COMPATIBILITY = ".org"
+
+
+class OrgMenu(BufferMenu):
+    """ File Menu """
+
+    def __init__(self):
+        super().__init__()
+        self.title = "Org"
+        self.key = "o"
 
 
 class Timestamp:

@@ -19,8 +19,12 @@ class SpaceBar(tk.Frame):
         self.menu.config(text="Col: 0")
         self.menu.pack(side="top", fill=tk.X)
 
+        self.postkey = tk.Label(self, bd=1, anchor=tk.W)
+        self.postkey.config(text="<ENTER KEY> :")
+        self.postkey.pack(anchor=tk.W, side="left", fill=tk.Y)
+
         self.key = tk.Label(self, bd=1, anchor=tk.W)
-        self.key.config(text="<ENTER KEY>")
+        self.key.config(text="<SPC>")
         self.key.pack(anchor=tk.W, side="left", fill=tk.Y)
 
     def set_menu(self, data):

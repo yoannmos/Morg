@@ -34,18 +34,18 @@ class MasterCommand(tk.Frame):
     def update_mode(self):
         """ Update mode label """
         self.status_bar.mode["text"] = self.selected_mode
-        self.keyboard_entry = "<ENTER KEY>"
+        self.keyboard_entry = "<SPC>"
         self.space_bar.key["text"] = self.keyboard_entry
 
     def key_chain(self, event):
         """ key chain in space mode"""
         # print(repr(event.char))
         # self.spacebar.key.focus_set()
-        if self.keyboard_entry == "<ENTER KEY>":
-            self.keyboard_entry = ""
-        self.keyboard_entry += ' "'
+        # if self.keyboard_entry == "<SPC>":
+        #     self.keyboard_entry = ""
+        self.keyboard_entry += " "
         self.keyboard_entry += event.char
-        self.keyboard_entry += '"'
+        self.keyboard_entry += ""
         self.space_bar.key["text"] = self.keyboard_entry
 
     def binding_key(self, frame):
