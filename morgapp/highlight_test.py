@@ -4,8 +4,12 @@ Syntax Highlight
 
 import tkinter as tk
 
+import tkinter.font as tkFont
 
-def color_text(edit, tag, word, fg_color="black", bg_color="white"):
+myfont = tkFont.Font(family="Helvetica", size=12)
+
+
+def color_text(edit, tag, word, fg_color="white", bg_color="#282c34"):
     # add a space to the end of the word
     word = word + " "
     edit.insert("end", word)
@@ -19,6 +23,7 @@ root = tk.Tk()
 root.geometry("600x200")
 
 edit = tk.Text(root)
+edit.config(background="#282c34", font=myfont)
 edit.pack()
 
 text = "Up the hill went Jack and Jill, down fell Jill and cried!"

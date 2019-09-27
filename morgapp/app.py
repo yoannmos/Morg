@@ -4,10 +4,12 @@ TODO : Setup layout
 """
 import tkinter as tk
 
-from command import MasterCommand
+# from command import MasterCommand
 from workframe import WorkFrame
+
 from statusbar import StatusBar
-from spacebar import SpaceBar
+
+# from spacebar import SpaceBar
 
 
 class Application(tk.Tk):
@@ -19,15 +21,15 @@ class Application(tk.Tk):
         # self.root = tk.Tk()
         self.title("Morg")
         self.geometry("800x800")
-        self.wm_iconbitmap("Notepad.ico")
+        self.wm_iconbitmap(r"D:\PythonWorkspace\Python_Project\Morg\Notepad.ico")
         self.minsize(width=600, height=600)
 
         workframe_frame = WorkFrame(self)
         statusbar_frame = StatusBar(self)
-        spacebar_frame = SpaceBar(self)
+        # spacebar_frame = SpaceBar(self)
 
         # MODE Binding
-        MasterCommand(self, workframe_frame, statusbar_frame, spacebar_frame)
+        # MasterCommand(self, workframe_frame, statusbar_frame, spacebar_frame)
 
         self.mainloop()
 

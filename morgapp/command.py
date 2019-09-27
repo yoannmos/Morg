@@ -69,13 +69,17 @@ class MasterCommand(tk.Frame):
             frame.bind("<Control-Key-v>", (lambda e: None))
 
         elif self.selected_mode == "INSERT":
+
             frame.bind(self.escape_key_binding, self.normal_key)
             binding_access = frame.bind("<Key>", "pass")
             frame.unbind("<Key>", binding_access)
+            # self.work_frame.active_buffer.delete("insert -1 chars", "insert")
 
         elif self.selected_mode == "SPACE":
             frame.bind(self.escape_key_binding, self.normal_key)
             frame.bind("<Key>", self.key_chain)
+            # move the cursor to the previous position
+            self.work_frame.active_buffer.mark_set("insert", "insert-1c")
 
         self.pack()
 
@@ -91,6 +95,7 @@ class MasterCommand(tk.Frame):
 
         self.work_frame.active_buffer.insert(tk.END, "")
         self.work_frame.active_buffer.config(state=tk.NORMAL)
+
         # self.workframe.active_buffer.focus_set()
 
     def insert_key(self, _):
@@ -118,11 +123,18 @@ class MasterCommand(tk.Frame):
         """
         if self.selected_mode == "NORMAL":
 
+            # self.work_frame.active_buffer.delete(
+            #     len(self.work_frame.active_buffer.get()) - 1
+            # )
+
             self.selected_mode = "SPACE"
             self.update_mode()
             self.binding_key(self.space_bar.key)
 
             self.space_bar.pack()
+
+            # a = int(len(self.self.work_frame.active_buffer.get()))
+            # self.work_frame.active_buffer.delete(a - 1)
 
             # self.workframe.active_buffer.insert(tk.END, "")
             # self.workframe.active_buffer.config(state=tk.DISABLED)
