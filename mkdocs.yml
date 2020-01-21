@@ -1,0 +1,53 @@
+site_name: Morg
+
+repo_name: 'yoannmos/Morg'
+repo_url: https://github.com/yoannmos/Morg
+
+nav:
+    - Overview : index.md
+    - About: about.md
+
+theme:
+    # name: 'rtd-dropdown'
+    # name: 'readthedocs'
+    name: 'material'
+    palette:
+        primary: 'Blue'
+        accent: 'Deep Orange'
+    # font:
+    #     text: 'Calibri'
+    #     code: 'Ubuntu Mono'
+    logo:
+        icon: 'explore'
+    feature:
+        tabs: true
+
+markdown_extensions:
+    - admonition
+    - codehilite:
+        guess_lang: false
+    - toc:
+        permalink: true
+
+    # - pymdownx.arithmatex
+    # - pymdownx.betterem:
+    #     smart_enable: all
+    # - pymdownx.caret
+    # - pymdownx.critic
+    # - pymdownx.details
+    # - pymdownx.emoji:
+    #     emoji_generator: !!python/name:pymdownx.emoji.to_svg
+    # - pymdownx.inlinehilite
+    # - pymdownx.magiclink
+    # - pymdownx.mark
+    # - pymdownx.smartsymbols
+    - pymdownx.superfences
+    # - pymdownx.tasklist:
+    #     custom_checkbox: true
+    # - pymdownx.tilde
+
+plugins:
+    - search
+
+# extra_css:
+#   - 'stylesheets/extra.css'
